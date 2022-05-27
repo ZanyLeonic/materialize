@@ -4264,7 +4264,7 @@ $jscomp.polyfill = function (e, r, p, m) {
           $tabsContent = $tabsContent.add($currContent);
         });
 
-        var $tabsWrapper = $('<div class="tabs-content carousel carousel-slider" id="tab-wrapper"></div>');
+        var $tabsWrapper = $('<div class="tabs-content carousel carousel-slider"></div>');
         $tabsContent.first().before($tabsWrapper);
         $tabsWrapper.append($tabsContent);
         $tabsContent[0].style.display = '';

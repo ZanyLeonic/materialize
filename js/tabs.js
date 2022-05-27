@@ -251,9 +251,7 @@
         $tabsContent = $tabsContent.add($currContent);
       });
 
-      let $tabsWrapper = $(
-        '<div class="tabs-content carousel carousel-slider" id="tab-wrapper"></div>'
-      );
+      let $tabsWrapper = $('<div class="tabs-content carousel carousel-slider"></div>');
       $tabsContent.first().before($tabsWrapper);
       $tabsWrapper.append($tabsContent);
       $tabsContent[0].style.display = '';

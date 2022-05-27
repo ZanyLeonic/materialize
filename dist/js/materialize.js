@@ -10846,13 +10846,11 @@ $jscomp.polyfill = function (e, r, p, m) {
       value: function _handleResize(e) {
         if (this.options.fullWidth) {
           this.itemWidth = this.$el.find('.carousel-item').first().innerWidth();
+          this.imageHeight = this.$el.find('.carousel-item.active').height();
           this.dim = this.itemWidth * 2 + this.options.padding;
           this.offset = this.center * 2 * this.itemWidth;
           this.target = this.offset;
-          if (!disableHeightImageCalc) {
-            this.imageHeight = this.$el.find('.carousel-item.active').height();
-            this._setCarouselHeight(true);
-          }
+          this._setCarouselHeight(true);
         } else {
           this._scroll();
         }
@@ -10870,7 +10868,7 @@ $jscomp.polyfill = function (e, r, p, m) {
 
         var firstSlide = this.$el.find('.carousel-item.active').length ? this.$el.find('.carousel-item.active').first() : this.$el.find('.carousel-item').first();
         var firstImage = firstSlide.find('img').first();
-        if (firstImage.length) {
+        if (firstImage.length && !disableHeightImageCalc) {
           if (firstImage[0].complete) {
             // If image won't trigger the load event
             var imageHeight = firstImage.height();
@@ -10889,7 +10887,7 @@ $jscomp.polyfill = function (e, r, p, m) {
               _this65.$el.css('height', el.offsetHeight + 'px');
             });
           }
-        } else if (!imageOnly) {
+        } else if (!imageOnly || disableHeightImageCalc) {
           var slideHeight = firstSlide.height();
           this.$el.css('height', slideHeight + 'px');
         }

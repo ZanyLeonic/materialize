@@ -342,13 +342,11 @@
           .find('.carousel-item')
           .first()
           .innerWidth();
+        this.imageHeight = this.$el.find('.carousel-item.active').height();
         this.dim = this.itemWidth * 2 + this.options.padding;
         this.offset = this.center * 2 * this.itemWidth;
         this.target = this.offset;
-        if (!disableHeightImageCalc) {
-          this.imageHeight = this.$el.find('.carousel-item.active').height();
-          this._setCarouselHeight(true);
-        }
+        this._setCarouselHeight(true);
       } else {
         this._scroll();
       }
@@ -363,7 +361,7 @@
         ? this.$el.find('.carousel-item.active').first()
         : this.$el.find('.carousel-item').first();
       let firstImage = firstSlide.find('img').first();
-      if (firstImage.length) {
+      if (firstImage.length && !disableHeightImageCalc) {
         if (firstImage[0].complete) {
           // If image won't trigger the load event
           let imageHeight = firstImage.height();
@@ -382,7 +380,7 @@
             this.$el.css('height', el.offsetHeight + 'px');
           });
         }
-      } else if (!imageOnly) {
+      } else if (!imageOnly || disableHeightImageCalc) {
         let slideHeight = firstSlide.height();
         this.$el.css('height', slideHeight + 'px');
       }

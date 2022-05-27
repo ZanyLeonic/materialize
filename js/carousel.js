@@ -10,7 +10,8 @@
     fullWidth: false, // Change to full width styles
     indicators: false, // Toggle indicators
     noWrap: false, // Don't wrap around and cycle through items.
-    onCycleTo: null // Callback for when a new slide is cycled to.
+    onCycleTo: null, // Callback for when a new slide is cycled to.
+    disableHeightImageCalc: false // Disables the functionality to resize the height of the image based on the width.
   };
 
   /**
@@ -341,11 +342,13 @@
           .find('.carousel-item')
           .first()
           .innerWidth();
-        this.imageHeight = this.$el.find('.carousel-item.active').height();
         this.dim = this.itemWidth * 2 + this.options.padding;
         this.offset = this.center * 2 * this.itemWidth;
         this.target = this.offset;
-        this._setCarouselHeight(true);
+        if (!disableHeightImageCalc) {
+          this.imageHeight = this.$el.find('.carousel-item.active').height();
+          this._setCarouselHeight(true);
+        }
       } else {
         this._scroll();
       }

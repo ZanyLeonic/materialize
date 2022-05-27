@@ -5,6 +5,7 @@
     duration: 300,
     onShow: null,
     swipeable: false,
+    disableHeightImageCalc: false, // Disables the functionality to resize the height of the image based on the width.
     responsiveThreshold: Infinity // breakpoint for swipeable
   };
 
@@ -262,6 +263,7 @@
       this._tabsCarousel = M.Carousel.init($tabsWrapper[0], {
         fullWidth: true,
         noWrap: true,
+        disableHeightImageCalc: this.options.disableHeightImageCalc,
         onCycleTo: (item) => {
           let prevIndex = this.index;
           this.index = $(item).index();

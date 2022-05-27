@@ -4003,6 +4003,7 @@ $jscomp.polyfill = function (e, r, p, m) {
     duration: 300,
     onShow: null,
     swipeable: false,
+    disableHeightImageCalc: false, // Disables the functionality to resize the height of the image based on the width.
     responsiveThreshold: Infinity // breakpoint for swipeable
   };
 
@@ -4275,6 +4276,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         this._tabsCarousel = M.Carousel.init($tabsWrapper[0], {
           fullWidth: true,
           noWrap: true,
+          disableHeightImageCalc: this.options.disableHeightImageCalc,
           onCycleTo: function (item) {
             var prevIndex = _this25.index;
             _this25.index = $(item).index();
@@ -10868,7 +10870,7 @@ $jscomp.polyfill = function (e, r, p, m) {
 
         var firstSlide = this.$el.find('.carousel-item.active').length ? this.$el.find('.carousel-item.active').first() : this.$el.find('.carousel-item').first();
         var firstImage = firstSlide.find('img').first();
-        if (firstImage.length && !disableHeightImageCalc) {
+        if (firstImage.length && !this.options.disableHeightImageCalc) {
           if (firstImage[0].complete) {
             // If image won't trigger the load event
             var imageHeight = firstImage.height();
@@ -10887,7 +10889,7 @@ $jscomp.polyfill = function (e, r, p, m) {
               _this65.$el.css('height', el.offsetHeight + 'px');
             });
           }
-        } else if (!imageOnly || disableHeightImageCalc) {
+        } else if (!imageOnly || this.options.disableHeightImageCalc) {
           var slideHeight = firstSlide.height();
           this.$el.css('height', slideHeight + 'px');
         }
